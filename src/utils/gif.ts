@@ -12,6 +12,22 @@ declare global {
   }
 }
 
+// Cache for the worker blob URL
+let workerBlobUrl: string | null = null;
+
+/**
+ * Fetch worker script and create a blob URL (bypasses CORS)
+ */
+async function getWorkerBlobUrl(): Promise<string> {
+  if (workerBlobUrl) return workerBlobUrl;
+
+  const response = await fetch('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js');
+  const workerCode = await response.text();
+  const blob = new Blob([workerCode], { type: 'application/javascript' });
+  workerBlobUrl = URL.createObjectURL(blob);
+  return workerBlobUrl;
+}
+
 export interface GifConfig {
   width: number;
   height: number;
@@ -123,13 +139,16 @@ export async function encodeGif(
   frameDelay: number,
   onProgress?: (percent: number) => void
 ): Promise<Blob> {
-  // Ensure gif.js is loaded
-  await ensureGifJsLoaded();
+  // Ensure gif.js is loaded and get worker blob URL
+  const [, workerUrl] = await Promise.all([
+    ensureGifJsLoaded(),
+    getWorkerBlobUrl()
+  ]);
 
   return new Promise((resolve, reject) => {
     const gif = new window.GIF({
       workers: 2,
-      workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js',
+      workerScript: workerUrl,
       quality: 10,
       width: frames[0].width,
       height: frames[0].height
