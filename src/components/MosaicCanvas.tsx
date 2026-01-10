@@ -16,6 +16,20 @@ export const MosaicCanvas: React.FC<MosaicCanvasProps> = ({
   const zoomCanvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
 
+  const handleDownload = () => {
+    if (!canvas) return;
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mosaic.png';
+      a.click();
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+
   // Update display canvas when mosaic changes
   useEffect(() => {
     if (canvas && displayCanvasRef.current) {
@@ -142,6 +156,10 @@ export const MosaicCanvas: React.FC<MosaicCanvasProps> = ({
       <div className="canvas-hint">
         <span>💡 Click on the mosaic to set animation start point</span>
       </div>
+
+      <button className="download-btn" onClick={handleDownload}>
+        Download Mosaic (PNG)
+      </button>
     </div>
   );
 };
