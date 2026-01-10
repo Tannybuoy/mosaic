@@ -31,7 +31,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
     e.preventDefault();
     setDragOver(null);
     const files = Array.from(e.dataTransfer.files).filter(isValidImageFile);
-    if (files.length > 0 && files.length <= 5) {
+    if (files.length > 0 && files.length <= 10) {
       onTilePhotosChange(files);
     }
   };
@@ -45,7 +45,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
 
   const handleTilesFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []).filter(isValidImageFile);
-    if (files.length > 0 && files.length <= 5) {
+    if (files.length > 0 && files.length <= 10) {
       onTilePhotosChange(files);
     }
   };
@@ -103,7 +103,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
 
       {/* Tile Photos Upload */}
       <div className="upload-group">
-        <label>Tile Photos (1-5 Required)</label>
+        <label>Tile Photos (1-10 Required)</label>
         <div
           className={`dropzone ${dragOver === 'tiles' ? 'drag-over' : ''} ${tilePhotos.length > 0 ? 'has-file' : ''}`}
           onDrop={handleTilesDrop}
@@ -127,7 +127,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
                   </button>
                 </div>
               ))}
-              {tilePhotos.length < 5 && (
+              {tilePhotos.length < 10 && (
                 <div className="add-more">
                   <span>+ Add more</span>
                 </div>
@@ -136,7 +136,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
           ) : (
             <div className="dropzone-content">
               <div className="upload-icon">🎨</div>
-              <p>Drop 1-5 tile photos or click to select</p>
+              <p>Drop 1-10 tile photos or click to select</p>
               <span className="hint">JPG, PNG, WEBP</span>
             </div>
           )}
@@ -151,9 +151,9 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
         />
       </div>
 
-      {tilePhotos.length > 5 && (
+      {tilePhotos.length > 10 && (
         <div className="error-message">
-          Maximum 5 tile photos allowed. Please remove some.
+          Maximum 10 tile photos allowed. Please remove some.
         </div>
       )}
     </div>
