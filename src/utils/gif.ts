@@ -128,7 +128,8 @@ export async function encodeGif(
 
   return new Promise((resolve, reject) => {
     const gif = new window.GIF({
-      workers: 0, // Disable workers to avoid CORS issues
+      workers: 2,
+      workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js',
       quality: 10,
       width: frames[0].width,
       height: frames[0].height
