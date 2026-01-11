@@ -31,8 +31,9 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
     e.preventDefault();
     setDragOver(null);
     const files = Array.from(e.dataTransfer.files).filter(isValidImageFile);
-    if (files.length > 0 && files.length <= 10) {
-      onTilePhotosChange(files);
+    if (files.length > 0) {
+      const combined = [...tilePhotos, ...files].slice(0, 10);
+      onTilePhotosChange(combined);
     }
   };
 
@@ -45,8 +46,9 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
 
   const handleTilesFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []).filter(isValidImageFile);
-    if (files.length > 0 && files.length <= 10) {
-      onTilePhotosChange(files);
+    if (files.length > 0) {
+      const combined = [...tilePhotos, ...files].slice(0, 10);
+      onTilePhotosChange(combined);
     }
   };
 
