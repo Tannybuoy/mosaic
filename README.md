@@ -9,7 +9,7 @@ Create stunning photo mosaics from your images and export them as smooth zoom-ou
 ## ✨ Features
 
 - **100% Client-Side Processing** - Everything runs in your browser, no server required
-- **Photo Mosaic Generation** - Transform any image into a mosaic using 1-5 tile photos
+- **Photo Mosaic Generation** - Transform any image into a mosaic using 1-10 tile photos
 - **Smooth Zoom Animations** - Create cinematic zoom-out effects from tile detail to full mosaic
 - **GIF Export** - Export your animations as high-quality GIFs
 - **Interactive Controls** - Fine-tune every aspect of your mosaic and animation
