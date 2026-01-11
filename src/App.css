@@ -84,9 +84,16 @@ body {
   max-width: 1800px;
   margin: 0 auto;
   width: 100%;
+  transition: grid-template-columns 0.3s ease;
 }
 
-/* Left Panel */
+/* Three-column layout when GIF settings are shown */
+.app-content.three-columns {
+  grid-template-columns: 320px 380px 1fr;
+  max-width: 2000px;
+}
+
+/* Left Panel (GIF Settings) */
 .left-panel {
   display: flex;
   flex-direction: column;
@@ -96,16 +103,44 @@ body {
   padding-right: 1rem;
 }
 
-.left-panel::-webkit-scrollbar {
+.left-panel.gif-panel {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Center Panel (Uploads + Mosaic Controls) */
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 250px);
+  padding-right: 1rem;
+}
+
+.left-panel::-webkit-scrollbar,
+.center-panel::-webkit-scrollbar {
   width: 8px;
 }
 
-.left-panel::-webkit-scrollbar-track {
+.left-panel::-webkit-scrollbar-track,
+.center-panel::-webkit-scrollbar-track {
   background: var(--bg-secondary);
   border-radius: 4px;
 }
 
-.left-panel::-webkit-scrollbar-thumb {
+.left-panel::-webkit-scrollbar-thumb,
+.center-panel::-webkit-scrollbar-thumb {
   background: var(--accent-primary);
   border-radius: 4px;
 }
@@ -734,13 +769,32 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* Responsive */
+@media (max-width: 1400px) {
+  .app-content.three-columns {
+    grid-template-columns: 280px 340px 1fr;
+  }
+}
+
 @media (max-width: 1200px) {
   .app-content {
     grid-template-columns: 1fr;
   }
-  
+
+  .app-content.three-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .left-panel.gif-panel {
+    order: 2;
+  }
+
+  .center-panel {
+    order: 1;
+  }
+
   .right-panel {
     min-height: 500px;
+    order: 3;
   }
 }
 
@@ -748,17 +802,21 @@ input[type="range"]::-moz-range-thumb {
   .app-header h1 {
     font-size: 2rem;
   }
-  
+
   .logo {
     font-size: 2.5rem;
   }
-  
+
   .app-content {
     padding: 1rem;
     gap: 1rem;
   }
-  
+
   .tiles-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mosaic-action-buttons {
+    flex-direction: column;
   }
 }

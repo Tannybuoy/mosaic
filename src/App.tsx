@@ -134,8 +134,23 @@ function App() {
         <p className="tagline">Create stunning photo mosaic images and animations of your travel pictures</p>
       </header>
 
-      <div className="app-content">
-        <div className="left-panel">
+      <div className={`app-content ${showGifSettings ? 'three-columns' : ''}`}>
+        {mosaicCanvas && showGifSettings && (
+          <div className="left-panel gif-panel">
+            <GifExporter
+              settings={gifSettings}
+              onSettingsChange={setGifSettings}
+              onExport={handleExportGif}
+              isExporting={isExporting}
+              canExport={canExport}
+              gifBlob={gifBlob}
+              renderProgress={renderProgress}
+              encodeProgress={encodeProgress}
+            />
+          </div>
+        )}
+
+        <div className="center-panel">
           <UploadPanel
             goalImage={goalImage}
             tilePhotos={tilePhotos}
@@ -150,19 +165,6 @@ function App() {
             isGenerating={isGenerating}
             canGenerate={canGenerate}
           />
-
-          {mosaicCanvas && showGifSettings && (
-            <GifExporter
-              settings={gifSettings}
-              onSettingsChange={setGifSettings}
-              onExport={handleExportGif}
-              isExporting={isExporting}
-              canExport={canExport}
-              gifBlob={gifBlob}
-              renderProgress={renderProgress}
-              encodeProgress={encodeProgress}
-            />
-          )}
 
           {(mosaicCanvas || gifBlob) && (
             <button className="reset-btn" onClick={handleReset}>
@@ -184,8 +186,8 @@ function App() {
 
       <footer className="app-footer">
         <p>
-          💡 <strong>Tips:</strong> Use 8-16px tiles for detailed mosaics. 
-          Higher FPS = smoother animation but larger file size. 
+          💡 <strong>Tips:</strong> Use 8-16px tiles for detailed mosaics.
+          Higher FPS = smoother animation but larger file size.
           Tint overlay helps match colors better.
         </p>
       </footer>
