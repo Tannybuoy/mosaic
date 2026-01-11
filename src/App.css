@@ -453,6 +453,7 @@ input[type="range"]::-moz-range-thumb {
   color: var(--text-secondary);
   border: 1px solid var(--border);
   margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .reset-btn:hover {
