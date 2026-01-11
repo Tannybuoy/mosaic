@@ -405,13 +405,13 @@ input[type="range"]::-moz-range-thumb {
   overflow: hidden;
 }
 
-.generate-btn, .export-btn {
+.generate-btn, .export-btn, .download-btn {
   background: var(--gradient-main);
   color: var(--text-primary);
   box-shadow: 0 4px 20px rgba(var(--accent-primary-rgb), 0.3);
 }
 
-.generate-btn::before, .export-btn::before {
+.generate-btn::before, .export-btn::before, .download-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -422,30 +422,23 @@ input[type="range"]::-moz-range-thumb {
   transition: left 0.5s ease;
 }
 
-.generate-btn:hover::before, .export-btn:hover::before {
+.generate-btn:hover::before, .export-btn:hover::before, .download-btn:hover::before {
   left: 100%;
 }
 
-.generate-btn:hover, .export-btn:hover {
+.generate-btn:hover, .export-btn:hover, .download-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 30px rgba(var(--accent-primary-rgb), 0.4);
 }
 
-.generate-btn:disabled, .export-btn:disabled {
+.generate-btn:disabled, .export-btn:disabled, .download-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
 }
 
 .download-btn {
-  background: var(--success);
-  color: var(--text-primary);
   margin-top: 1rem;
-}
-
-.download-btn:hover {
-  background: var(--success-hover);
-  transform: translateY(-2px);
 }
 
 .reset-btn {
