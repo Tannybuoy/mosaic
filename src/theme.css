@@ -1,0 +1,81 @@
+/**
+ * Mosaic Theme - Daily Bloom
+ * A warm, floral color palette inspired by nature
+ *
+ * Color Palette:
+ * - #FFFFFF - White (text)
+ * - #D174D2 - Orchid Pink (secondary accent)
+ * - #E0563F - Coral (primary accent)
+ * - #3F567F - Slate Blue (tertiary accent)
+ * - #412653 - Deep Purple (backgrounds)
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════
+   * BACKGROUND COLORS
+   * ═══════════════════════════════════════════════════════════ */
+  --bg-primary: #412653;        /* Deep purple - main background */
+  --bg-secondary: #4d3060;      /* Lighter purple - panels */
+  --bg-tertiary: #3F567F;       /* Slate blue - inputs/tertiary */
+
+  /* ═══════════════════════════════════════════════════════════
+   * ACCENT COLORS
+   * ═══════════════════════════════════════════════════════════ */
+  --accent-primary: #E0563F;    /* Coral - primary accent */
+  --accent-secondary: #D174D2;  /* Orchid pink - secondary accent */
+  --accent-tertiary: #3F567F;   /* Slate blue - tertiary accent */
+
+  /* ═══════════════════════════════════════════════════════════
+   * TEXT COLORS
+   * ═══════════════════════════════════════════════════════════ */
+  --text-primary: #FFFFFF;      /* White - main text */
+  --text-secondary: #e0d4e8;    /* Light lavender - secondary text */
+  --text-tertiary: #a89bb2;     /* Muted purple - hint text */
+
+  /* ═══════════════════════════════════════════════════════════
+   * BORDER COLOR
+   * ═══════════════════════════════════════════════════════════ */
+  --border: #5a3d6e;            /* Purple border */
+
+  /* ═══════════════════════════════════════════════════════════
+   * STATUS COLORS
+   * ═══════════════════════════════════════════════════════════ */
+  --success: #4ade80;           /* Green - success states */
+  --success-hover: #22c55e;     /* Darker green - success hover */
+  --warning: #fbbf24;           /* Amber - warning states */
+  --error: #f87171;             /* Red - error states */
+
+  /* ═══════════════════════════════════════════════════════════
+   * GRADIENTS
+   * ═══════════════════════════════════════════════════════════ */
+  --gradient-main: linear-gradient(135deg, #E0563F 0%, #D174D2 50%, #3F567F 100%);
+  --gradient-subtle: linear-gradient(180deg, rgba(224, 86, 63, 0.1) 0%, rgba(209, 116, 210, 0.1) 100%);
+
+  /* ═══════════════════════════════════════════════════════════
+   * EFFECTS
+   * ═══════════════════════════════════════════════════════════ */
+  --glow: 0 0 20px rgba(224, 86, 63, 0.4);
+  --glow-secondary: 0 0 20px rgba(209, 116, 210, 0.4);
+
+  /* ═══════════════════════════════════════════════════════════
+   * RGBA VARIANTS (for transparency effects)
+   * ═══════════════════════════════════════════════════════════ */
+
+  /* Primary accent (Coral) */
+  --accent-primary-rgb: 224, 86, 63;
+
+  /* Secondary accent (Orchid Pink) */
+  --accent-secondary-rgb: 209, 116, 210;
+
+  /* Tertiary accent (Slate Blue) */
+  --accent-tertiary-rgb: 63, 86, 127;
+
+  /* Error (Red) */
+  --error-rgb: 248, 113, 113;
+
+  /* ═══════════════════════════════════════════════════════════
+   * FONTS
+   * ═══════════════════════════════════════════════════════════ */
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}

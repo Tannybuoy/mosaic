@@ -1,27 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
-
-:root {
-  --bg-primary: #0a0e15;
-  --bg-secondary: #131820;
-  --bg-tertiary: #1a2030;
-  --accent-primary: #ff0080;
-  --accent-secondary: #00d9ff;
-  --accent-tertiary: #7c3aed;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a8b8;
-  --text-tertiary: #6b7280;
-  --border: #2a3345;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  
-  --gradient-main: linear-gradient(135deg, #ff0080 0%, #7c3aed 50%, #00d9ff 100%);
-  --gradient-subtle: linear-gradient(180deg, rgba(255, 0, 128, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
-  --glow: 0 0 20px rgba(255, 0, 128, 0.3);
-  
-  --font-display: 'Unbounded', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-}
+@import './theme.css';
 
 * {
   margin: 0;
@@ -35,9 +13,9 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
-  background-image: 
-    radial-gradient(circle at 20% 10%, rgba(255, 0, 128, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 90%, rgba(0, 217, 255, 0.08) 0%, transparent 50%);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(var(--accent-primary-rgb), 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(var(--accent-secondary-rgb), 0.08) 0%, transparent 50%);
 }
 
 .app {
@@ -191,8 +169,8 @@ body {
 
 .dropzone.drag-over {
   border-color: var(--accent-secondary);
-  background: rgba(0, 217, 255, 0.1);
-  box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+  background: rgba(var(--accent-secondary-rgb), 0.1);
+  box-shadow: 0 0 30px rgba(var(--accent-secondary-rgb), 0.2);
 }
 
 .dropzone-content {
@@ -430,7 +408,7 @@ input[type="range"]::-moz-range-thumb {
 .generate-btn, .export-btn {
   background: var(--gradient-main);
   color: var(--text-primary);
-  box-shadow: 0 4px 20px rgba(255, 0, 128, 0.3);
+  box-shadow: 0 4px 20px rgba(var(--accent-primary-rgb), 0.3);
 }
 
 .generate-btn::before, .export-btn::before {
@@ -450,7 +428,7 @@ input[type="range"]::-moz-range-thumb {
 
 .generate-btn:hover, .export-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(255, 0, 128, 0.4);
+  box-shadow: 0 6px 30px rgba(var(--accent-primary-rgb), 0.4);
 }
 
 .generate-btn:disabled, .export-btn:disabled {
@@ -466,7 +444,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .download-btn:hover {
-  background: #059669;
+  background: var(--success-hover);
   transform: translateY(-2px);
 }
 
@@ -658,12 +636,12 @@ input[type="range"]::-moz-range-thumb {
   background: var(--accent-primary);
   border-radius: 4px;
   transition: width 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
+  box-shadow: 0 0 10px rgba(var(--accent-primary-rgb), 0.5);
 }
 
 .progress-fill.encoding {
   background: var(--accent-secondary);
-  box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+  box-shadow: 0 0 10px rgba(var(--accent-secondary-rgb), 0.5);
 }
 
 /* GIF Result */
@@ -717,7 +695,7 @@ input[type="range"]::-moz-range-thumb {
 
 .error-message {
   padding: 0.75rem;
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(var(--error-rgb), 0.1);
   border: 1px solid var(--error);
   border-radius: 6px;
   color: var(--error);
