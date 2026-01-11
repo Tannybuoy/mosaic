@@ -126,9 +126,9 @@ function App() {
       <header className="app-header">
         <h1>
           <span className="logo">🎨</span>
-          Mosaic Animator
+          Tanya's Mosaic Animator
         </h1>
-        <p className="tagline">Create stunning photo mosaics with zoom-out animations</p>
+        <p className="tagline">Create stunning photo mosaic images and animations of your travel pictures</p>
       </header>
 
       <div className="app-content">
