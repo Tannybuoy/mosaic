@@ -197,14 +197,23 @@ export async function encodeGif(
  */
 export async function generateGif(
   mosaicCanvas: HTMLCanvasElement,
-  config: GifConfig,
+  config: Omit<GifConfig, 'height'>,
   onRenderProgress?: (current: number, total: number) => void,
   onEncodeProgress?: (percent: number) => void
 ): Promise<Blob> {
+  // Calculate height from mosaic aspect ratio
+  const aspectRatio = mosaicCanvas.height / mosaicCanvas.width;
+  const height = Math.round(config.width * aspectRatio);
+
+  const fullConfig: GifConfig = {
+    ...config,
+    height
+  };
+
   // Step 1: Render frames
   const { frames, frameDelay } = await renderZoomFrames(
     mosaicCanvas,
-    config,
+    fullConfig,
     onRenderProgress
   );
 
