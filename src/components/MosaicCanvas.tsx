@@ -68,8 +68,9 @@ export const MosaicCanvas: React.FC<MosaicCanvasProps> = ({
       0, 0, zoomSize, zoomSize
     );
 
-    // Draw crosshair
-    zoomCtx.strokeStyle = '#ff0080';
+    // Draw crosshair using theme color
+    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim();
+    zoomCtx.strokeStyle = accentColor || '#E0563F';
     zoomCtx.lineWidth = 2;
     zoomCtx.beginPath();
     zoomCtx.moveTo(zoomSize / 2, 0);
