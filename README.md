@@ -46,7 +46,7 @@ npm run preview
 ### 1. Upload Images
 
 - **Goal Image**: The target image you want to recreate as a mosaic (required)
-- **Tile Photos**: 1-5 photos that will be used as repeating tiles (required)
+- **Tile Photos**: 1-10 photos that will be used as repeating tiles (required)
 
 Supported formats: JPG, PNG, WEBP
 
