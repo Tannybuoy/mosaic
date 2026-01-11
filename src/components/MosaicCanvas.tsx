@@ -70,7 +70,7 @@ export const MosaicCanvas: React.FC<MosaicCanvasProps> = ({
 
     // Draw crosshair using theme color
     const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim();
-    zoomCtx.strokeStyle = accentColor || '#E0563F';
+    zoomCtx.strokeStyle = accentColor || '#f59e0b';
     zoomCtx.lineWidth = 2;
     zoomCtx.beginPath();
     zoomCtx.moveTo(zoomSize / 2, 0);
