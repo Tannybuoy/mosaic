@@ -37,8 +37,9 @@ function App() {
   const [gifBlob, setGifBlob] = useState<Blob | null>(null);
   const [renderProgress, setRenderProgress] = useState<{ current: number; total: number } | null>(null);
   const [encodeProgress, setEncodeProgress] = useState<number | null>(null);
+  const [showGifSettings, setShowGifSettings] = useState(false);
 
-  const canGenerate = goalImage && tilePhotos.length >= 1 && tilePhotos.length <= 10;
+  const canGenerate = !!(goalImage && tilePhotos.length >= 1 && tilePhotos.length <= 10);
   const canExport = mosaicCanvas !== null;
 
   const handleGenerateMosaic = useCallback(async () => {
@@ -47,6 +48,7 @@ function App() {
     setIsGenerating(true);
     setMosaicCanvas(null);
     setGifBlob(null);
+    setShowGifSettings(false);
 
     try {
       // Load goal image
@@ -118,6 +120,7 @@ function App() {
       setGifBlob(null);
       setPreprocessedTiles(null);
       setFocusPoint({ x: 0.5, y: 0.5 });
+      setShowGifSettings(false);
     }
   };
 
@@ -148,7 +151,7 @@ function App() {
             canGenerate={canGenerate}
           />
 
-          {mosaicCanvas && (
+          {mosaicCanvas && showGifSettings && (
             <GifExporter
               settings={gifSettings}
               onSettingsChange={setGifSettings}
@@ -173,6 +176,8 @@ function App() {
             canvas={mosaicCanvas}
             onFocusPointChange={(x, y) => setFocusPoint({ x, y })}
             focusPoint={focusPoint}
+            onShowGifSettings={() => setShowGifSettings(true)}
+            showGifSettings={showGifSettings}
           />
         </div>
       </div>

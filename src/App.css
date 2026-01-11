@@ -592,6 +592,37 @@ input[type="range"]::-moz-range-thumb {
   font-family: var(--font-mono);
 }
 
+/* Mosaic Action Buttons */
+.mosaic-action-buttons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.mosaic-action-buttons .download-btn,
+.mosaic-action-buttons .generate-gif-btn {
+  flex: 1;
+  margin-top: 0;
+}
+
+.mosaic-action-buttons .generate-gif-btn {
+  background: var(--gradient-main);
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.mosaic-action-buttons .generate-gif-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+.mosaic-action-buttons .generate-gif-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(var(--accent-primary-rgb), 0.4);
+}
+
 /* Progress */
 .progress-section {
   margin: 1rem 0;
