@@ -22,9 +22,13 @@ async function getWorkerBlobUrl(): Promise<string> {
   if (workerBlobUrl) return workerBlobUrl;
 
   const response = await fetch('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch worker script: ${response.status}`);
+  }
   const workerCode = await response.text();
   const blob = new Blob([workerCode], { type: 'application/javascript' });
   workerBlobUrl = URL.createObjectURL(blob);
+  console.log('Worker blob URL created:', workerBlobUrl);
   return workerBlobUrl;
 }
 
@@ -146,16 +150,20 @@ export async function encodeGif(
   ]);
 
   return new Promise((resolve, reject) => {
+    console.log('Creating GIF encoder with worker URL:', workerUrl);
+
     const gif = new window.GIF({
       workers: 2,
       workerScript: workerUrl,
       quality: 10,
       width: frames[0].width,
-      height: frames[0].height
+      height: frames[0].height,
+      debug: true
     });
 
     // Progress handler
     gif.on('progress', (p: number) => {
+      console.log('GIF progress:', p);
       if (onProgress) {
         onProgress(Math.round(p * 100));
       }
@@ -163,6 +171,7 @@ export async function encodeGif(
 
     // Finished handler
     gif.on('finished', (blob: Blob) => {
+      console.log('GIF finished, blob size:', blob.size);
       resolve(blob);
     });
 
@@ -171,12 +180,14 @@ export async function encodeGif(
       reject(new Error('GIF encoding aborted'));
     });
 
-    // Add all frames
-    frames.forEach(canvas => {
-      gif.addFrame(canvas, { delay: frameDelay });
+    // Add all frames with copy: true to ensure data is captured
+    console.log('Adding', frames.length, 'frames');
+    frames.forEach((canvas, i) => {
+      gif.addFrame(canvas, { delay: frameDelay, copy: true });
     });
 
     // Start encoding
+    console.log('Starting GIF render...');
     gif.render();
   });
 }
