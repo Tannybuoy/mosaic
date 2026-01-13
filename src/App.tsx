@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { UploadPanel } from './components/UploadPanel';
 import { MosaicControls, MosaicSettings } from './components/MosaicControls';
 import { MosaicCanvas } from './components/MosaicCanvas';
@@ -22,7 +22,7 @@ function App() {
   });
   const [mosaicCanvas, setMosaicCanvas] = useState<HTMLCanvasElement | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [preprocessedTiles, setPreprocessedTiles] = useState<TileData[] | null>(null);
+  const [, setPreprocessedTiles] = useState<TileData[] | null>(null);
 
   // GIF state
   const [gifSettings, setGifSettings] = useState<GifSettings>({
@@ -38,7 +38,7 @@ function App() {
   const [renderProgress, setRenderProgress] = useState<{ current: number; total: number } | null>(null);
   const [encodeProgress, setEncodeProgress] = useState<number | null>(null);
 
-  const canGenerate = goalImage && tilePhotos.length >= 1 && tilePhotos.length <= 10;
+  const canGenerate = !!(goalImage && tilePhotos.length >= 1 && tilePhotos.length <= 10);
   const canExport = mosaicCanvas !== null;
 
   const handleGenerateMosaic = useCallback(async () => {

@@ -185,7 +185,7 @@ export async function encodeGif(
 
     // Add all frames with copy: true to ensure data is captured
     console.log('Adding', frames.length, 'frames');
-    frames.forEach((canvas, i) => {
+    frames.forEach((canvas) => {
       gif.addFrame(canvas, { delay: frameDelay, copy: true });
     });
 
