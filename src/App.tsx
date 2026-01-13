@@ -37,6 +37,7 @@ function App() {
   const [gifBlob, setGifBlob] = useState<Blob | null>(null);
   const [renderProgress, setRenderProgress] = useState<{ current: number; total: number } | null>(null);
   const [encodeProgress, setEncodeProgress] = useState<number | null>(null);
+  const [showGifSettings, setShowGifSettings] = useState(false);
 
   const canGenerate = !!(goalImage && tilePhotos.length >= 1 && tilePhotos.length <= 10);
   const canExport = mosaicCanvas !== null;
@@ -47,6 +48,7 @@ function App() {
     setIsGenerating(true);
     setMosaicCanvas(null);
     setGifBlob(null);
+    setShowGifSettings(false);
 
     try {
       // Load goal image
@@ -118,6 +120,7 @@ function App() {
       setGifBlob(null);
       setPreprocessedTiles(null);
       setFocusPoint({ x: 0.5, y: 0.5 });
+      setShowGifSettings(false);
     }
   };
 
@@ -131,8 +134,23 @@ function App() {
         <p className="tagline">Create stunning photo mosaic images and animations of your travel pictures</p>
       </header>
 
-      <div className="app-content">
-        <div className="left-panel">
+      <div className={`app-content ${showGifSettings ? 'three-columns' : ''}`}>
+        {mosaicCanvas && showGifSettings && (
+          <div className="left-panel gif-panel">
+            <GifExporter
+              settings={gifSettings}
+              onSettingsChange={setGifSettings}
+              onExport={handleExportGif}
+              isExporting={isExporting}
+              canExport={canExport}
+              gifBlob={gifBlob}
+              renderProgress={renderProgress}
+              encodeProgress={encodeProgress}
+            />
+          </div>
+        )}
+
+        <div className="center-panel">
           <UploadPanel
             goalImage={goalImage}
             tilePhotos={tilePhotos}
@@ -148,19 +166,6 @@ function App() {
             canGenerate={canGenerate}
           />
 
-          {mosaicCanvas && (
-            <GifExporter
-              settings={gifSettings}
-              onSettingsChange={setGifSettings}
-              onExport={handleExportGif}
-              isExporting={isExporting}
-              canExport={canExport}
-              gifBlob={gifBlob}
-              renderProgress={renderProgress}
-              encodeProgress={encodeProgress}
-            />
-          )}
-
           {(mosaicCanvas || gifBlob) && (
             <button className="reset-btn" onClick={handleReset}>
               🔄 Reset & Start Over
@@ -173,14 +178,16 @@ function App() {
             canvas={mosaicCanvas}
             onFocusPointChange={(x, y) => setFocusPoint({ x, y })}
             focusPoint={focusPoint}
+            onShowGifSettings={() => setShowGifSettings(true)}
+            showGifSettings={showGifSettings}
           />
         </div>
       </div>
 
       <footer className="app-footer">
         <p>
-          💡 <strong>Tips:</strong> Use 8-16px tiles for detailed mosaics. 
-          Higher FPS = smoother animation but larger file size. 
+          💡 <strong>Tips:</strong> Use 8-16px tiles for detailed mosaics.
+          Higher FPS = smoother animation but larger file size.
           Tint overlay helps match colors better.
         </p>
       </footer>

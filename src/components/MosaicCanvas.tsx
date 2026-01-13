@@ -4,12 +4,16 @@ interface MosaicCanvasProps {
   canvas: HTMLCanvasElement | null;
   onFocusPointChange: (x: number, y: number) => void;
   focusPoint: { x: number; y: number };
+  onShowGifSettings: () => void;
+  showGifSettings: boolean;
 }
 
 export const MosaicCanvas: React.FC<MosaicCanvasProps> = ({
   canvas,
   onFocusPointChange,
-  focusPoint
+  focusPoint,
+  onShowGifSettings,
+  showGifSettings
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const displayCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -154,13 +158,24 @@ export const MosaicCanvas: React.FC<MosaicCanvasProps> = ({
         </div>
       )}
 
-      <div className="canvas-hint">
-        <span>💡 Click on the mosaic to set animation start point</span>
-      </div>
+      {showGifSettings && (
+        <div className="canvas-hint">
+          <span>💡 Click on the mosaic to set animation start point</span>
+        </div>
+      )}
 
-      <button className="download-btn" onClick={handleDownload}>
-        Download Mosaic (PNG)
-      </button>
+      <div className="mosaic-action-buttons">
+        <button className="download-btn" onClick={handleDownload}>
+          Download Mosaic
+        </button>
+        <button
+          className="generate-btn generate-gif-btn"
+          onClick={onShowGifSettings}
+          disabled={showGifSettings}
+        >
+          {showGifSettings ? 'GIF Settings Open' : 'Generate GIF'}
+        </button>
+      </div>
     </div>
   );
 };
